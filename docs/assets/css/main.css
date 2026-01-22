@@ -3984,3 +3984,158 @@ input, select, textarea {
 			}
 
 		}
+
+/* -------------------------------------- */
+/* Details Elements (override) */
+/* -------------------------------------- */
+
+details {
+	background-color: #312450 !important;
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	border-radius: 0.25em;
+	margin: 1em 0;
+	padding: 1em;
+	color: #fff;
+  }
+  
+  /* Direct child summary to avoid messing with nested details */
+  details > summary {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	list-style: none;
+	background-color: #5e42a6 !important;
+	color: #fff !important;
+	font-weight: bold;
+	font-size: 1em;
+	padding: 0.5em 1em;
+	margin: -1em -1em 1em -1em; 
+	border-radius: 0.25em 0.25em 0 0;
+	outline: none;
+	cursor: pointer;
+  }
+  
+  /* Hide the default disclosure arrows in all major browsers */
+  details > summary::-webkit-details-marker,
+  details > summary::marker {
+	display: none !important; 
+	content: none !important;
+  }
+  
+  /* Arrow in closed state (character swap only) */
+  details > summary::before {
+	content: "▸"; /* or "►" etc. */
+	display: inline-block;
+	margin-right: 0.5em;
+	transition: transform 0.2s ease;
+  }
+  
+  /* Arrow in open state */
+  details[open] > summary::before {
+	transform: rotate(90deg);
+  }
+  
+  /* Keep summary background consistent when open (optional) */
+  details[open] > summary {
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+	background-color: #6c4cb2; /* slightly lighter purple, adjust as needed */
+  }
+
+
+/* Lightbox Overlay (hidden by default) */
+#lightbox-overlay {
+	position: fixed;
+	top: 0; 
+	left: 0;
+	width: 100%; 
+	height: 100%;
+	background: rgba(0,0,0,0.8);
+	display: flex;               /* So we can center the image */
+	justify-content: center;
+	align-items: center;
+	visibility: hidden;          /* Hidden initially */
+	opacity: 0;                  /* Fully transparent */
+	pointer-events: none;        /* No clicks pass through */
+	transition: opacity 0.3s ease;  /* Fade in/out */
+	z-index: 9999;               /* Above all other elements */
+  }
+  
+  /* When we add the .show class via JS, fade in */
+  #lightbox-overlay.show {
+	visibility: visible;
+	opacity: 1;
+	pointer-events: auto;
+  }
+  
+  /* The close button in the top-right corner */
+  #lightbox-close {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	font-size: 2em;
+	color: #fff;
+	background: transparent;
+	border: none;
+	cursor: pointer;
+  }
+  
+  /* The enlarged image styling */
+  #lightbox-overlay img {
+	max-width: 90%;
+	max-height: 90%;
+	box-shadow: 0 0 10px rgba(0,0,0,0.5);
+	cursor: zoom-out;  /* Let the user know clicking the image can close (optional) */
+  }
+  
+  /* Make all dynamically loaded "plot" images show a zoom-in cursor on hover */
+  .lightboxable {
+	cursor: zoom-in;
+  }
+  .lightboxable:hover {
+	opacity: 0.95; /* subtle hover effect, optional */
+  }
+
+  .my-metrics-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 1em 0;
+	font-family: Arial, sans-serif; /* or any other font you prefer */
+	font-size: 0.9em;
+	color: #333;                  /* Dark text for good contrast */
+	background-color: #f9f9f9;    /* Light gray background overall */
+  }
+  
+  /* Header row styling */
+  .my-metrics-table thead th {
+	background-color: #8a8a8a;  /* Slightly darker gray for the header */
+	color: #333 !important;              /* Dark text in header for contrast */
+	font-weight: bold;
+  }
+  
+  .my-metrics-table th,
+  .my-metrics-table td {
+	border: 1px solid #ccc;     /* Light gray borders */
+	padding: 0.75em 1em;        /* Spacing inside cells */
+	text-align: center;           /* Align text to the left */
+  }
+  
+  /* Distinguish the first column */
+  .my-metrics-table td:first-child {
+	background-color: #b2b2b2;   /* Subtle lighter gray */
+	border-right: 2px solid #ccc; /* Slightly thicker border on the right */
+	font-weight: bold;           /* Emphasize the row labels */
+	text-align: left;             /* Align text to the left */
+  }
+  
+  /* Zebra-striping for even rows (optional) */
+  .my-metrics-table tbody tr:nth-child(even) {
+	background-color: #e7e7e7;   /* Another light gray for alternating rows */
+  }
+
+  .my-metrics-table strong,
+	.my-metrics-table b {
+	color: #333 !important; /* or whatever text color you want */
+	}
+  
+  

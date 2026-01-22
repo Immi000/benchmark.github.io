@@ -33,13 +33,10 @@
     <!-- Navigation -->
     <nav id="nav-menu">
         <ul style="list-style-type: none; display: flex; gap: 10px; margin: 0;">
-            <!-- Archived navigation (Overview/Benchmark/Docs) kept for reference. -->
-            <!--
             <li><a href="index.html">Overview</a></li>
             <li><a href="benchmark.html" class="active">Benchmark</a></li>
             <li><a href="documentation.html">Docs</a></li>
-            -->
-            <li><a href="results.html">Results</a></li>
+			<li><a href="results.html">Results</a></li>
             <li><a href="config.html">Config Maker</a></li>
         </ul>
     </nav>
@@ -245,17 +242,188 @@
 
 				<section id="datasets">
 					<h2>Data</h2>
-
-					<h3>Included Datasets (add example plots of some trajectories here!)</h3>
-					<h4>osu2008</h4>
-					<p>This dataset contains 1000 samples, 100 timesteps, and 29 chemical quantities. It is a
-						dataset
-						provided by the Ohio State University in 2008. The dataset is used to model the dynamics of
-						a
-						chemical reaction. The dataset is included in the benchmark and can be used to compare the
-						performance of the surrogates.</p>
+				  
+					<p>
+					  This page provides an overview of the five datasets included in the benchmark.
+					  Click on any dataset name below to expand and see for a description and plots. 
+					  For a full explanation of data structure, configuration, and
+					  how to add your own datasets, see the documentation below.
 					</p>
-
+				  
+					<!-- Dataset 1: coupled_oscillators -->
+					<details>
+					  <summary>coupled_oscillators</summary>
+					  <p>
+						A system of five oscillators (each with position and velocity) coupled through both linear and non-linear spring forces. Unlike the other datasets, the quantities here can be negative, and the trajectories are best kept in linear space rather than log space. This setup highlights interactions between multiple oscillators and demonstrates more complex dynamics due to the non-linear coupling terms.
+					</p>
+					  <div class="sub-section">
+						<!-- Four images for this dataset -->
+						<img
+						  class="lightboxable"
+						  src="assets/images/datasets/coupled_oscillators/all_gradients.jpg"
+						  alt="All Gradients"
+						  style="display:block; margin:10px auto; max-width:80%; height:auto; max-height:600px;"
+						/>
+						<img
+						  class="lightboxable"
+						  src="assets/images/datasets/coupled_oscillators/all_trajectories.jpg"
+						  alt="All Trajectories"
+						  style="display:block; margin:10px auto; max-width:80%; height:auto; max-height:600px;"
+						/>
+						<img
+						  class="lightboxable"
+						  src="assets/images/datasets/coupled_oscillators/example_trajectories.jpg"
+						  alt="Example Trajectories"
+						  style="display:block; margin:10px auto; max-width:80%; height:auto; max-height:600px;"
+						/>
+						<img
+						  class="lightboxable"
+						  src="assets/images/datasets/coupled_oscillators/IC_distribution.jpg"
+						  alt="IC Distribution"
+						  style="display:block; margin:10px auto; max-width:80%; height:auto; max-height:600px;"
+						/>
+					  </div>
+					</details>
+				  
+					<!-- Dataset 2: lotka_volterra -->
+					<details>
+					  <summary>lotka_volterra</summary>
+					  <div class="sub-section">
+						<p>
+							An extended predator-prey model with six interacting species—three predators and three prey. Certain initial conditions can lead to populations spanning multiple orders of magnitude, resulting in cyclic or complex population dynamics. This dataset highlights both cyclical interactions and substantial variability across different initial conditions.
+						</p>
+						<!-- Four images for this dataset -->
+						<img
+						  class="lightboxable"
+						  src="assets/images/datasets/lotka_volterra/all_gradients.jpg"
+						  alt="All Gradients"
+						  style="display:block; margin:10px auto; max-width:80%; height:auto; max-height:600px;"
+						/>
+						<img
+						  class="lightboxable"
+						  src="assets/images/datasets/lotka_volterra/all_trajectories.jpg"
+						  alt="All Trajectories"
+						  style="display:block; margin:10px auto; max-width:80%; height:auto; max-height:600px;"
+						/>
+						<img
+						  class="lightboxable"
+						  src="assets/images/datasets/lotka_volterra/example_trajectories.jpg"
+						  alt="Example Trajectories"
+						  style="display:block; margin:10px auto; max-width:80%; height:auto; max-height:600px;"
+						/>
+						<img
+						  class="lightboxable"
+						  src="assets/images/datasets/lotka_volterra/IC_distribution.jpg"
+						  alt="IC Distribution"
+						  style="display:block; margin:10px auto; max-width:80%; height:auto; max-height:600px;"
+						/>
+					  </div>
+					</details>
+				  
+					<!-- Dataset 3: osu2008 -->
+					<details>
+					  <summary>osu2008</summary>
+					  <div class="sub-section">
+						<p>
+							Derived from an astrochemical reaction network of 29 chemical species, this dataset covers a wide range of timescales (up to 10^8 years) in log space. Its initial conditions are generated through a specialized procedure that sets floors and bounds for key species. The complexity and scale mirror real astrochemical processes, making it more intricate than simpler toy examples.
+						</p>
+						<!-- Four images for this dataset -->
+						<img
+						  class="lightboxable"
+						  src="assets/images/datasets/osu2008/all_gradients.jpg"
+						  alt="All Gradients"
+						  style="display:block; margin:10px auto; max-width:80%; height:auto; max-height:600px;"
+						/>
+						<img
+						  class="lightboxable"
+						  src="assets/images/datasets/osu2008/all_trajectories.jpg"
+						  alt="All Trajectories"
+						  style="display:block; margin:10px auto; max-width:80%; height:auto; max-height:600px;"
+						/>
+						<img
+						  class="lightboxable"
+						  src="assets/images/datasets/osu2008/example_trajectories.jpg"
+						  alt="Example Trajectories"
+						  style="display:block; margin:10px auto; max-width:80%; height:auto; max-height:600px;"
+						/>
+						<img
+						  class="lightboxable"
+						  src="assets/images/datasets/osu2008/IC_distribution.jpg"
+						  alt="IC Distribution"
+						  style="display:block; margin:10px auto; max-width:80%; height:auto; max-height:600px;"
+						/>
+					  </div>
+					</details>
+				  
+					<!-- Dataset 4: simple_ode -->
+					<details>
+					  <summary>simple_ode</summary>
+					  <div class="sub-section">
+						<p>
+							A five-species system with soft non-linear effects and non-conservative behavior. Each species has logistic-like self-regulation combined with interactions among them. Although smaller than the astrochemical examples, it still showcases interesting population dynamics and the interplay of internal regulation with cross-species effects.
+						</p>
+						<!-- Four images for this dataset -->
+						<img
+						  class="lightboxable"
+						  src="assets/images/datasets/simple_ode/all_gradients.jpg"
+						  alt="All Gradients"
+						  style="display:block; margin:10px auto; max-width:80%; height:auto; max-height:600px;"
+						/>
+						<img
+						  class="lightboxable"
+						  src="assets/images/datasets/simple_ode/all_trajectories.jpg"
+						  alt="All Trajectories"
+						  style="display:block; margin:10px auto; max-width:80%; height:auto; max-height:600px;"
+						/>
+						<img
+						  class="lightboxable"
+						  src="assets/images/datasets/simple_ode/example_trajectories.jpg"
+						  alt="Example Trajectories"
+						  style="display:block; margin:10px auto; max-width:80%; height:auto; max-height:600px;"
+						/>
+						<img
+						  class="lightboxable"
+						  src="assets/images/datasets/simple_ode/IC_distribution.jpg"
+						  alt="IC Distribution"
+						  style="display:block; margin:10px auto; max-width:80%; height:auto; max-height:600px;"
+						/>
+					  </div>
+					</details>
+				  
+					<!-- Dataset 5: simple_reaction -->
+					<details>
+					  <summary>simple_reaction</summary>
+					  <div class="sub-section">
+						<!-- Four images for this dataset -->
+						 <p>
+							A five-species chemical network involving both reversible and irreversible reactions, sampled in log space for each species. Despite being simpler than the astrochemical network, it incorporates realistic reaction kinetics (mass action) with quadratic and linear terms, capturing essential features of chemical reaction systems in a more compact form.
+						 </p>
+						<img
+						  class="lightboxable"
+						  src="assets/images/datasets/simple_reaction/all_gradients.jpg"
+						  alt="All Gradients"
+						  style="display:block; margin:10px auto; max-width:80%; height:auto; max-height:600px;"
+						/>
+						<img
+						  class="lightboxable"
+						  src="assets/images/datasets/simple_reaction/all_trajectories.jpg"
+						  alt="All Trajectories"
+						  style="display:block; margin:10px auto; max-width:80%; height:auto; max-height:600px;"
+						/>
+						<img
+						  class="lightboxable"
+						  src="assets/images/datasets/simple_reaction/example_trajectories.jpg"
+						  alt="Example Trajectories"
+						  style="display:block; margin:10px auto; max-width:80%; height:auto; max-height:600px;"
+						/>
+						<img
+						  class="lightboxable"
+						  src="assets/images/datasets/simple_reaction/IC_distribution.jpg"
+						  alt="IC Distribution"
+						  style="display:block; margin:10px auto; max-width:80%; height:auto; max-height:600px;"
+						/>
+					  </div>
+					</details>
 					<h3>Data Structure</h3>
 					<p>All datasets are stored in the <code>datasets</code> folder in the root directory. A dataset can
 						be
@@ -531,6 +699,14 @@
 
 	</div>
 
+    <!-- Lightbox Overlay -->
+    <div id="lightbox-overlay">
+        <!-- A close button in the top-right corner -->
+        <button id="lightbox-close">&times;</button>
+        <!-- The enlarged plot image goes here -->
+        <img id="lightbox-img" alt="Enlarged Plot" />
+    </div>
+
 	<!-- Footer -->
 	<footer id="footer" class="wrapper alt">
 		<div class="inner">
@@ -550,6 +726,7 @@
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
 	<script src="assets/js/menu-toggle.js"></script>
+	<script src="assets/js/lightbox.js"></script>
 
 
 </body>

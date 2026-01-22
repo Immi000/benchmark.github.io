@@ -74,20 +74,14 @@ function fullResetForm() {
 }
 
 function validateConfigForm() {
-  const requiredFields = ["training_id", "data-dataset", "misc-devices"];
-  const requiredFieldLabels = ["Training ID", "Dataset", "Devices"];
+  const requiredFields = ["training_id", "data-dataset", "misc-seed"];
+  const requiredFieldLabels = ["Training ID", "Dataset", "Seed"];
   for (var i = 0; i < requiredFields.length; i++) {
     var field = document.getElementById(requiredFields[i]);
     if (field.value == "") {
       alert("Field " + requiredFieldLabels[i] + " is required");
       return false;
     }
-  }
-
-  const devices = getSelectedDevices();
-  if (devices.length === 0) {
-    alert("At least one device must be provided");
-    return false;
   }
 
   const [surrogates, surrogateParams] = getSelectedSurrogatesWithParams();
@@ -149,12 +143,7 @@ function validateConfigForm() {
       alert("Interpolation intervals are required when active");
       return false;
     }
-    if (
-      intervals
-        .split(",")
-        .map((interval) => interval.trim())
-        .some((interval) => interval === "" || isNaN(interval))
-    ) {
+    if (intervals.split(",").some((interval) => isNaN(interval))) {
       alert("Interpolation intervals must be numbers");
       return false;
     }
@@ -166,12 +155,7 @@ function validateConfigForm() {
       alert("Extrapolation cutoffs are required when active");
       return false;
     }
-    if (
-      cutoffs
-        .split(",")
-        .map((cutoff) => cutoff.trim())
-        .some((cutoff) => cutoff === "" || isNaN(cutoff))
-    ) {
+    if (cutoffs.split(",").some((cutoff) => isNaN(cutoff))) {
       alert("Extrapolation cutoffs must be numbers");
       return false;
     }
@@ -183,12 +167,7 @@ function validateConfigForm() {
       alert("Sparse factors are required when active");
       return false;
     }
-    if (
-      factors
-        .split(",")
-        .map((factor) => factor.trim())
-        .some((factor) => factor === "" || isNaN(factor))
-    ) {
+    if (factors.split(",").some((factor) => isNaN(factor))) {
       alert("Sparse factors must be numbers");
       return false;
     }
@@ -202,8 +181,8 @@ function validateConfigForm() {
       alert("Batch scaling factors are required when active");
       return false;
     }
-    if (batch_scaling.split(",").some((factor) => factor.trim() === "")) {
-      alert("Batch scaling factors must be non-empty strings");
+    if (batch_scaling.split(",").some((factor) => isNaN(factor))) {
+      alert("Batch scaling factors must be numbers");
       return false;
     }
   }
@@ -223,37 +202,14 @@ function validateConfigForm() {
   }
 
   const seed = document.getElementById("misc-seed").value;
-  if (seed !== "" && isNaN(seed)) {
+  if (seed == "") {
+    alert("Seed is required");
+    return false;
+  }
+  if (isNaN(seed)) {
     alert("Seed must be a number");
     return false;
   }
-
-  const tolerance = document.getElementById("data-tolerance").value;
-  if (tolerance !== "" && isNaN(tolerance)) {
-    alert("Tolerance must be a number");
-    return false;
-  }
-
-  const subsetFactor = document.getElementById("data-subset_factor").value;
-  if (subsetFactor !== "" && isNaN(subsetFactor)) {
-    alert("Subset factor must be a number");
-    return false;
-  }
-
-  const relativeErrorThreshold = document.getElementById(
-    "metric-relative_error_threshold"
-  ).value;
-  if (relativeErrorThreshold !== "" && isNaN(relativeErrorThreshold)) {
-    alert("Relative error threshold must be a number");
-    return false;
-  }
-
-  const errorPercentile = document.getElementById("metric-error_percentile").value;
-  if (errorPercentile !== "" && isNaN(errorPercentile)) {
-    alert("Error percentile must be a number");
-    return false;
-  }
-
   return true;
 }
 
@@ -264,15 +220,6 @@ function downloadYAML() {
 
   const trainingId = `${document.getElementById("training_id").value}`;
   const datasetName = `${document.getElementById("data-dataset").value}`;
-  const tolerance = document.getElementById("data-tolerance").value;
-  const subsetFactor = document.getElementById("data-subset_factor").value;
-  const seedValue = document.getElementById("misc-seed").value;
-  const relativeErrorThresholdValue = document.getElementById(
-    "metric-relative_error_threshold"
-  ).value;
-  const errorPercentileValue = document.getElementById(
-    "metric-error_percentile"
-  ).value;
 
   const config = {
     training_id: String(trainingId),
@@ -281,22 +228,17 @@ function downloadYAML() {
     dataset: {
       name: String(datasetName),
       log10_transform: document.getElementById("data-log10").checked,
-      log10_transform_params:
-        document.getElementById("data-log10-params").checked,
       normalise: String(document.getElementById("data-norm").value),
-      normalise_per_species: document.getElementById(
-        "data-normalise-per-species"
-      ).checked,
-      tolerance: tolerance === "" ? null : Number(tolerance),
-      subset_factor: subsetFactor === "" ? 1 : Number(subsetFactor),
-      log_timesteps: document.getElementById("data-log-timesteps").checked,
       use_optimal_params: document.getElementById("data-use_optimal_params")
         .checked,
+      tolerance: parseFloat(document.getElementById("data-tolerance").value),
+      subset_factor: parseInt(
+        document.getElementById("data-subset_factor").value
+      ),
     },
     devices: getSelectedDevices(),
-    seed: seedValue === "" ? 42 : Number(seedValue),
+    seed: Number(document.getElementById("misc-seed").value),
     verbose: document.getElementById("misc-verbose").checked,
-    checkpoint: document.getElementById("misc-checkpoint").checked,
     batch_size: getBatchSizeList(),
     epochs: getEpochList(),
     interpolation: {
@@ -322,17 +264,10 @@ function downloadYAML() {
       ),
     },
     losses: document.getElementById("bench-losses").checked,
-    iterative: document.getElementById("bench-iterative").checked,
-    gradients: document.getElementById("bench-gradients").checked,
+    gradients: document.getElementById("bench-dyn_acc").checked,
     timing: document.getElementById("bench-timing").checked,
     compute: document.getElementById("bench-compute").checked,
-    compare: document.getElementById("bench-compare").checked,
-    relative_error_threshold:
-      relativeErrorThresholdValue === ""
-        ? 0.0
-        : Number(relativeErrorThresholdValue),
-    error_percentile:
-      errorPercentileValue === "" ? 99 : Number(errorPercentileValue),
+    compare: document.getElementById("misc-compare").checked,
   };
 
   function Format(data) {
@@ -352,10 +287,7 @@ function downloadYAML() {
   function replacer(key, value) {
     // The original logic: If it's an array of pure numbers, format inline.
     // If you want to also inline arrays of strings, remove the numeric check.
-    if (
-      Array.isArray(value) &&
-      value.every((v) => typeof v === "number" || typeof v === "string")
-    ) {
+    if (Array.isArray(value) && !value.some((v) => typeof v !== "number")) {
       return Format(jsyaml.dump(value, { flowLevel: 0 }).trim());
     }
     return value;
@@ -426,10 +358,10 @@ function getCustomModelsWithParams() {
 
 function getSelectedDevices() {
   const deviceString = document.getElementById("misc-devices").value;
-  return deviceString
-    .split(",")
-    .map((device) => device.trim())
-    .filter((device) => device !== "");
+  if (!deviceString) {
+    return ["cpu"];
+  }
+  return deviceString.split(",").map((device) => device.trim());
 }
 
 function getInterpolationIntervals() {
@@ -445,30 +377,14 @@ function getSparseFactors() {
 }
 
 function getBatchScalingFactors() {
-  return getStringListFromElement("bench-batch_scaling_factors");
+  return getIntListFromElement("bench-batch_scaling_factors");
 }
 
 function getIntListFromElement(elementId) {
   const element = document.getElementById(elementId);
   const value = element.value;
   if (value) {
-    return value
-      .split(",")
-      .map((val) => val.trim())
-      .filter((val) => val !== "")
-      .map((val) => parseInt(val));
-  }
-  return [];
-}
-
-function getStringListFromElement(elementId) {
-  const element = document.getElementById(elementId);
-  const value = element.value;
-  if (value) {
-    return value
-      .split(",")
-      .map((val) => val.trim())
-      .filter((val) => val !== "");
+    return value.split(",").map((val) => parseInt(val.trim()));
   }
   return [];
 }

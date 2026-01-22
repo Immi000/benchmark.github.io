@@ -1,20 +1,41 @@
 <!DOCTYPE HTML>
 <!--
-	Hyperspace by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+    Hyperspace by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
 
 <head>
-	<title>CODES Benchmark</title>
-	<meta charset="utf-8" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="assets/css/main.css" />
-	<noscript>
-		<link rel="stylesheet" href="assets/css/noscript.css" />
-	</noscript>
+    <title>CODES Benchmark - Results</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <style>
+        /* Optional styles for the expandable sections */
+        details {
+            margin: 1em 0;
+        }
+
+        details summary {
+            font-weight: bold;
+            cursor: pointer;
+            padding: 0.5em;
+            background-color: #f4f4f4;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .sub-section {
+            margin-left: 1.5em;
+            padding: 0.5em 1em;
+            border-left: 2px solid #ccc;
+        }
+    </style>
+    <noscript>
+        <link rel="stylesheet" href="assets/css/noscript.css" />
+    </noscript>
 </head>
 
 <body class="is-preload">
@@ -33,10 +54,13 @@
     <!-- Navigation -->
     <nav id="nav-menu">
         <ul style="list-style-type: none; display: flex; gap: 10px; margin: 0;">
+            <!-- Archived navigation (Overview/Benchmark/Docs) kept for reference. -->
+            <!--
             <li><a href="index.html">Overview</a></li>
             <li><a href="benchmark.html">Benchmark</a></li>
             <li><a href="documentation.html">Docs</a></li>
-			<li><a href="results.html" class="active">Results</a></li>
+            -->
+            <li><a href="results.html" class="active">Results</a></li>
             <li><a href="config.html">Config Maker</a></li>
         </ul>
     </nav>
@@ -55,206 +79,828 @@
     </div>
 </header>
 
+    <!-- Wrapper -->
+    <div id="wrapper">
 
+    <!-- Main -->
+    <section id="main" class="wrapper">
+      <div class="inner">
+      <h1 class="major">Benchmark Results</h1>
+      <p>
+          This page shows the results from benchmark runs on various datasets. 
+          Click on a dataset to expand the available plots.
+      </p>
 
-	<!-- Wrapper -->
-	<div id="wrapper">
+      <!-- Nested Expandable Structure -->
+      <section id="benchmark-results">
 
-		<!-- Main -->
-		<section id="main" class="wrapper">
-			<div class="inner">
-				<h1 class="major">Exemplary Results</h1>
-				<p>This page shows some examplary evaluations performed on the <b>osu2008</b> dataset to show the benchmark's capabilities and explain considerations for the different plots.</p>
+          <!-- Dataset: coupled_oscillators -->
+          <details>
+          <summary>coupled_oscillators</summary>
+          <div class="sub-section">
 
-				<section id="plots">
-					<h2>Plots</h2>
+            <table class="my-metrics-table">
+              <thead>
+                <tr>
+                  <th>Metric</th>
+                  <th>MultiONet</th>
+                  <th>FullyConnected</th>
+                  <th>LatentPoly</th>
+                  <th>LatentNeuralODE</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>MSE</td>
+                  <td>1.12e-05</td>
+                  <td><strong>1.42e-07</strong></td>
+                  <td>1.42e-03</td>
+                  <td>7.58e-04</td>
+                </tr>
+                <tr>
+                  <td>MAE</td>
+                  <td>2.56e-03</td>
+                  <td><strong>2.79e-04</strong></td>
+                  <td>2.95e-02</td>
+                  <td>1.97e-02</td>
+                </tr>
+                <tr>
+                  <td>MRE</td>
+                  <td>6.16 %</td>
+                  <td><strong>0.61 %</strong></td>
+                  <td>68.80 %</td>
+                  <td>54.88 %</td>
+                </tr>
+                <tr>
+                  <td>Epochs</td>
+                  <td>15000</td>
+                  <td>6000</td>
+                  <td>25000</td>
+                  <td>4000</td>
+                </tr>
+                <tr>
+                  <td>Train Time (hh:mm:ss)</td>
+                  <td>00:59:19</td>
+                  <td><strong>00:14:34</strong></td>
+                  <td>03:33:50</td>
+                  <td>02:32:25</td>
+                </tr>
+                <tr>
+                  <td>Inference Times</td>
+                  <td>3.51 ms ± 0.20 ms</td>
+                  <td>986.41 µs ± 52.16 µs</td>
+                  <td><strong>645.90 µs ± 28.87 µs</strong></td>
+                  <td>219.48 ms ± 5.01 ms</td>
+                </tr>
+                <tr>
+                  <td>Gradient PCC</td>
+                  <td>0.2599</td>
+                  <td>0.5290</td>
+                  <td>0.1430</td>
+                  <td>0.1215</td>
+                </tr>
+                <tr>
+                  <td># Trainable Params</td>
+                  <td>1972163</td>
+                  <td>504668</td>
+                  <td><strong>195100</strong></td>
+                  <td>659403</td>
+                </tr>
+                <tr>
+                  <td>Model Memory (MB)</td>
+                  <td>8.14 MB</td>
+                  <td>1.93 MB</td>
+                  <td><strong>1.49 MB</strong></td>
+                  <td>5.85 MB</td>
+                </tr>
+                <tr>
+                  <td>Forward Pass Memory (MB)</td>
+                  <td>26.20 MB</td>
+                  <td><strong>13.69 MB</strong></td>
+                  <td>121.56 MB</td>
+                  <td>110.21 MB</td>
+                </tr>
+                <tr>
+                  <td>Avg. Uncertainty</td>
+                  <td>3.17e-03</td>
+                  <td>3.52e-04</td>
+                  <td>3.25e-02</td>
+                  <td>2.44e-02</td>
+                </tr>
+                <tr>
+                  <td>DE MAE</td>
+                  <td>1.35e-03</td>
+                  <td><strong>1.96e-04</strong></td>
+                  <td>1.61e-02</td>
+                  <td>9.91e-03</td>
+                </tr>
+                <tr>
+                  <td>DE MRE</td>
+                  <td>4.58 %</td>
+                  <td><strong>0.60 %</strong></td>
+                  <td>34.78 %</td>
+                  <td>22.03 %</td>
+                </tr>
+                <tr>
+                  <td>UQ PCC</td>
+                  <td>0.3819</td>
+                  <td>0.2765</td>
+                  <td>0.1654</td>
+                  <td>0.3767</td>
+                </tr>
+                <tr>
+                  <td>UQ Confidence</td>
+                  <td>-33.99 %</td>
+                  <td><strong>-5.47 %</strong></td>
+                  <td>2132.27 %</td>
+                  <td>1864.76 %</td>
+                </tr>
+              </tbody>
+            </table>                
+                  
+              <!-- Comparative Plots -->
+              <details>
+              <summary>Comparative Plots</summary>
+              <div class="sub-section" id="coupled_oscillators-comparative">
+                  <!-- Auto-loaded by script -->
+              </div>
+              </details>
 
-					<p> The benchmark has two kinds of outputs: Metrics and plots. Both are given on a per-surrogate
-						basis and as comparison between the benchmarked surrogates. <br>
-						All metric output is stored in <code>results/training_id/</code>. The individual surrogate
-						metrics are stored in <code>surrogatename_metrics.yaml</code> (e.g.
-						fullyconnected_metrics.yaml), while the comparative parts are stored as <code>metrics.csv</code>
-						and <code>metrics_table.txt</code> (this table is also printed to the CLI at the end of the
-						benchmark). <br>
-						All plots are stored in <code>plots/training_id/</code>, the individual plots for each surrogate
-						in the respective surrogate directory and the comparative plots in the main directory. <br>
-					</p>
+              <!-- Architectures -->
+              <details>
+              <summary>FullyConnected</summary>
+              <div class="sub-section" id="coupled_oscillators-FullyConnected">
+                  <!-- Auto-loaded by script -->
+              </div>
+              </details>
+              <details>
+              <summary>MultiONet</summary>
+              <div class="sub-section" id="coupled_oscillators-MultiONet">
+                  <!-- Auto-loaded by script -->
+              </div>
+              </details>
+              <details>
+              <summary>LatentNeuralODE</summary>
+              <div class="sub-section" id="coupled_oscillators-LatentNeuralODE">
+                  <!-- Auto-loaded by script -->
+              </div>
+              </details>
+              <details>
+              <summary>LatentPoly</summary>
+              <div class="sub-section" id="coupled_oscillators-LatentPoly">
+                  <!-- Auto-loaded by script -->
+              </div>
+              </details>
 
-					<h3 id="comp_plots">Comparative Plots</h3>
+          </div>
+          </details>
 
-					<p>
-						Below is a selection of the plots that can be created in the benchmark if at least two surrogate architectures were trained.
-						These plots serve to compare characteristics between surrogates.
-					</p>
+          <!-- Dataset: lotka_volterra -->
+          <details>
+          <summary>lotka_volterra</summary>
+          <div class="sub-section">
 
-					<img src="assets/images/comparative_plots/accuracy_error_distributions.png" alt="Accuracy Error Distributions"
-						style="width: 90%; max-width: 800px; margin: 10px auto; display: block;">
+            <table class="my-metrics-table">
+              <thead>
+                <tr>
+                  <th>Metric</th>
+                  <th>MultiONet</th>
+                  <th>FullyConnected</th>
+                  <th>LatentPoly</th>
+                  <th>LatentNeuralODE</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>MSE</td>
+                  <td>3.23e+02</td>
+                  <td><strong>1.75e-01</strong></td>
+                  <td>1.68e+02</td>
+                  <td>4.54e+01</td>
+                </tr>
+                <tr>
+                  <td>MAE</td>
+                  <td>3.72e+00</td>
+                  <td><strong>1.68e-01</strong></td>
+                  <td>6.63e+00</td>
+                  <td>2.83e+00</td>
+                </tr>
+                <tr>
+                  <td>MRE</td>
+                  <td>4736.57 %</td>
+                  <td><strong>1.42 %</strong></td>
+                  <td>234782.95 %</td>
+                  <td>230.28 %</td>
+                </tr>
+                <tr>
+                  <td>Epochs</td>
+                  <td>15000</td>
+                  <td>20000</td>
+                  <td>24000</td>
+                  <td>8000</td>
+                </tr>
+                <tr>
+                  <td>Train Time (hh:mm:ss)</td>
+                  <td>01:05:04</td>
+                  <td><strong>00:27:23</strong></td>
+                  <td>01:24:02</td>
+                  <td>13:07:48</td>
+                </tr>
+                <tr>
+                  <td>Inference Times</td>
+                  <td>3.27 ms ± 0.15 ms</td>
+                  <td><strong>609.17 µs ± 59.44 µs</strong></td>
+                  <td>750.66 µs ± 115.50 µs</td>
+                  <td>466.40 ms ± 3.67 ms</td>
+                </tr>
+                <tr>
+                  <td>Gradient PCC</td>
+                  <td>0.2744</td>
+                  <td>0.5486</td>
+                  <td>0.6950</td>
+                  <td>0.4760</td>
+                </tr>
+                <tr>
+                  <td># Trainable Params</td>
+                  <td>800775</td>
+                  <td><strong>52620</strong></td>
+                  <td>78456</td>
+                  <td>200537</td>
+                </tr>
+                <tr>
+                  <td>Model Memory (MB)</td>
+                  <td>3.06 MB</td>
+                  <td><strong>0.20 MB</strong></td>
+                  <td>0.60 MB</td>
+                  <td>1.54 MB</td>
+                </tr>
+                <tr>
+                  <td>Forward Pass Memory (MB)</td>
+                  <td>14.17 MB</td>
+                  <td><strong>7.94 MB</strong></td>
+                  <td>75.67 MB</td>
+                  <td>105.78 MB</td>
+                </tr>
+                <tr>
+                  <td>Avg. Uncertainty</td>
+                  <td>2.60e+00</td>
+                  <td>1.68e-01</td>
+                  <td>2.08e+00</td>
+                  <td>3.51e+00</td>
+                </tr>
+                <tr>
+                  <td>DE MAE</td>
+                  <td>3.26e+00</td>
+                  <td><strong>9.61e-02</strong></td>
+                  <td>6.43e+00</td>
+                  <td>2.95e+00</td>
+                </tr>
+                <tr>
+                  <td>DE MRE</td>
+                  <td>2246.18 %</td>
+                  <td><strong>0.85 %</strong></td>
+                  <td>234892.26 %</td>
+                  <td>10799946.34 %</td>
+                </tr>
+                <tr>
+                  <td>UQ PCC</td>
+                  <td>0.8776</td>
+                  <td>0.6317</td>
+                  <td>0.3078</td>
+                  <td>0.6307</td>
+                </tr>
+                <tr>
+                  <td>UQ Confidence</td>
+                  <td>80921.77 %</td>
+                  <td><strong>-0.44 %</strong></td>
+                  <td>4203140.56 %</td>
+                  <td>1331634245.40 %</td>
+                </tr>
+              </tbody>
+            </table>
 
-					<p>This smoothed histogram plot serves to compare the distribution of the relative errors of the surrogate models. This can aid in identifying long tails of the distribution or multimodality. 
-						Of note could also be the difference in discrepancy between mean and median error.
-					</p>
+              <details>
+              <summary>Comparative Plots</summary>
+              <div class="sub-section" id="lotka_volterra-comparative">
+              </div>
+              </details>
+              <details>
+              <summary>FullyConnected</summary>
+              <div class="sub-section" id="lotka_volterra-FullyConnected">
+              </div>
+              </details>
+              <details>
+              <summary>MultiONet</summary>
+              <div class="sub-section" id="lotka_volterra-MultiONet">
+              </div>
+              </details>
+              <details>
+              <summary>LatentNeuralODE</summary>
+              <div class="sub-section" id="lotka_volterra-LatentNeuralODE">
+              </div>
+              </details>
+              <details>
+              <summary>LatentPoly</summary>
+              <div class="sub-section" id="lotka_volterra-LatentPoly">
+              </div>
+              </details>
 
-					<img src="assets/images/comparative_plots/accuracy_rel_errors_time_models.png" alt="Accuracy Relative Error Time Models"
-						style="width: 90%; max-width: 800px; margin: 0 auto; display: block;">
+          </div>
+          </details>
 
-					<p>This plot compares mean and median relative errors across time to identify common spikes or noteable differences between errors. 
-						In this example, there are some spikes in the second half which are roughly shared between models (although more pronounced for LatentNeuralODE and LatentPoly). 
-						These could be explained by overall more dynamic sections of the trajectories at the corresponding time steps, which can be confirmed by looking at some plots of the trajectories or average gradients across time.
-					</p>
+          <!-- Dataset: osu2008 -->
+          <details>
+          <summary>osu2008</summary>
+          <div class="sub-section">
 
-					<img src="assets/images/comparative_plots/generalization_error_comparison.png" alt="Generalization Error Comparison"
-						style="width: 90%; max-width: 800px; margin: 0 auto; display: block;">
+            <table class="my-metrics-table">
+              <thead>
+                <tr>
+                  <th>Metric</th>
+                  <th>MultiONet</th>
+                  <th>FullyConnected</th>
+                  <th>LatentPoly</th>
+                  <th>LatentNeuralODE</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>MSE</td>
+                  <td>8.64e+02</td>
+                  <td>9.90e+01</td>
+                  <td><strong>6.94e-01</strong></td>
+                  <td>8.58e-01</td>
+                </tr>
+                <tr>
+                  <td>MAE</td>
+                  <td>3.93e+00</td>
+                  <td>1.54e+00</td>
+                  <td><strong>8.42e-02</strong></td>
+                  <td>9.33e-02</td>
+                </tr>
+                <tr>
+                  <td>MRE</td>
+                  <td>3.81 %</td>
+                  <td><strong>0.29 %</strong></td>
+                  <td>7.96 %</td>
+                  <td>8.04 %</td>
+                </tr>
+                <tr>
+                  <td>Epochs</td>
+                  <td>7000</td>
+                  <td>20000</td>
+                  <td>20000</td>
+                  <td>15000</td>
+                </tr>
+                <tr>
+                  <td>Train Time (hh:mm:ss)</td>
+                  <td>00:58:08</td>
+                  <td><strong>00:21:39</strong></td>
+                  <td>02:21:23</td>
+                  <td>02:57:50</td>
+                </tr>
+                <tr>
+                  <td>Inference Times</td>
+                  <td>13.62 ms ± 8.40 ms</td>
+                  <td><strong>454.38 µs ± 52.27 µs</strong></td>
+                  <td>727.38 µs ± 55.81 µs</td>
+                  <td>35.56 ms ± 1.87 ms</td>
+                </tr>
+                <tr>
+                  <td>Gradient PCC</td>
+                  <td>-0.0068</td>
+                  <td>-0.1830</td>
+                  <td>0.4264</td>
+                  <td>0.4223</td>
+                </tr>
+                <tr>
+                  <td># Trainable Params</td>
+                  <td>2488384</td>
+                  <td><strong>29609</strong></td>
+                  <td>163221</td>
+                  <td>688968</td>
+                </tr>
+                <tr>
+                  <td>Model Memory (MB)</td>
+                  <td>9.50 MB</td>
+                  <td><strong>0.11 MB</strong></td>
+                  <td>1.25 MB</td>
+                  <td>6.06 MB</td>
+                </tr>
+                <tr>
+                  <td>Forward Pass Memory (MB)</td>
+                  <td>94.11 MB</td>
+                  <td><strong>16.30 MB</strong></td>
+                  <td>106.23 MB</td>
+                  <td>106.52 MB</td>
+                </tr>
+                <tr>
+                  <td>Avg. Uncertainty</td>
+                  <td>7.52e+00</td>
+                  <td>1.04e+00</td>
+                  <td>3.95e-01</td>
+                  <td>1.11e-01</td>
+                </tr>
+                <tr>
+                  <td>DE MAE</td>
+                  <td>4.79e+00</td>
+                  <td>7.72e-01</td>
+                  <td>4.36e-01</td>
+                  <td><strong>5.91e-02</strong></td>
+                </tr>
+                <tr>
+                  <td>DE MRE</td>
+                  <td>2.98 %</td>
+                  <td><strong>0.18 %</strong></td>
+                  <td>6.71 %</td>
+                  <td>2.77 %</td>
+                </tr>
+                <tr>
+                  <td>UQ PCC</td>
+                  <td>0.8964</td>
+                  <td>0.7517</td>
+                  <td>0.9914</td>
+                  <td>0.7024</td>
+                </tr>
+                <tr>
+                  <td>UQ Confidence</td>
+                  <td>-18.90 %</td>
+                  <td><strong>-0.09 %</strong></td>
+                  <td>0.65 %</td>
+                  <td>22.88 %</td>
+                </tr>
+              </tbody>
+            </table>
 
-					<p>One of the main axes of comparison provided by CODES is the scaling of model errors across different modalities. 
-						This plot allows for insights into how the surrogats handle interpolating and extrapolating in the time domain and how much they are able to learn from sparse data.
-					</p>
+              <details>
+              <summary>Comparative Plots</summary>
+              <div class="sub-section" id="osu2008-comparative">
+              </div>
+              </details>
+              <details>
+              <summary>FullyConnected</summary>
+              <div class="sub-section" id="osu2008-FullyConnected">
+              </div>
+              </details>
+              <details>
+              <summary>MultiONet</summary>
+              <div class="sub-section" id="osu2008-MultiONet">
+              </div>
+              </details>
+              <details>
+              <summary>LatentNeuralODE</summary>
+              <div class="sub-section" id="osu2008-LatentNeuralODE">
+              </div>
+              </details>
+              <details>
+              <summary>LatentPoly</summary>
+              <div class="sub-section" id="osu2008-LatentPoly">
+              </div>
+              </details>
 
-					<img src="assets/images/comparative_plots/losses_MAE_main_model.png " alt="Losses MAE Main Model"
-						style="width: 90%; max-width: 800px; margin: 0 auto; display: block;">
+          </div>
+          </details>
 
-					<p>There is a range of loss plots in the benchmark which can help identify problems during training or potential for further improvement in case one of the models has not converged fully.
-						From this plot, it is evident that adding a learning rate scheduler for MultiONet and LatentPoly could be beneficial, as the fluctuations in the loss are quite pronounced.
-						This plot has the additional benefit of showing the loss not over the course of epochs, but as a function of actual training time (i.e., actual compute).
-						This is in many cases more informative as epochs are much faster for some models than others.
-					</p>
+          <!-- Dataset: simple_ode -->
+          <details>
+          <summary>simple_ode</summary>
+          <div class="sub-section">
 
-					<img src="assets/images/comparative_plots/timing_inference.png" alt="Timing Inference"
-						style="width: 90%; max-width: 800px; margin: 0 auto; display: block;">
+            <table class="my-metrics-table">
+              <thead>
+                <tr>
+                  <th>Metric</th>
+                  <th>MultiONet</th>
+                  <th>FullyConnected</th>
+                  <th>LatentPoly</th>
+                  <th>LatentNeuralODE</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>MSE</td>
+                  <td><strong>6.53e+04</strong></td>
+                  <td>3.67e+05</td>
+                  <td>1.06e+07</td>
+                  <td>6.82e+06</td>
+                </tr>
+                <tr>
+                  <td>MAE</td>
+                  <td><strong>3.50e+00</strong></td>
+                  <td>1.08e+01</td>
+                  <td>3.69e+01</td>
+                  <td>2.34e+01</td>
+                </tr>
+                <tr>
+                  <td>MRE</td>
+                  <td><strong>1.49 %</strong></td>
+                  <td>1.55 %</td>
+                  <td>4.85 %</td>
+                  <td>1.69 %</td>
+                </tr>
+                <tr>
+                  <td>Epochs</td>
+                  <td>7500</td>
+                  <td>10500</td>
+                  <td>12000</td>
+                  <td>6000</td>
+                </tr>
+                <tr>
+                  <td>Train Time (hh:mm:ss)</td>
+                  <td>00:53:33</td>
+                  <td>00:59:27</td>
+                  <td><strong>00:41:16</strong></td>
+                  <td>04:15:57</td>
+                </tr>
+                <tr>
+                  <td>Inference Times</td>
+                  <td>2.96 ms ± 0.14 ms</td>
+                  <td>1.75 ms ± 0.14 ms</td>
+                  <td><strong>595.67 µs ± 84.73 µs</strong></td>
+                  <td>50.16 ms ± 0.72 ms</td>
+                </tr>
+                <tr>
+                  <td>Gradient PCC</td>
+                  <td>0.9513</td>
+                  <td>0.9943</td>
+                  <td>0.9210</td>
+                  <td>0.8400</td>
+                </tr>
+                <tr>
+                  <td># Trainable Params</td>
+                  <td>1282024</td>
+                  <td>4495205</td>
+                  <td><strong>86167</strong></td>
+                  <td>846324</td>
+                </tr>
+                <tr>
+                  <td>Model Memory (MB)</td>
+                  <td>4.89 MB</td>
+                  <td>17.99 MB</td>
+                  <td><strong>0.66 MB</strong></td>
+                  <td>7.31 MB</td>
+                </tr>
+                <tr>
+                  <td>Forward Pass Memory (MB)</td>
+                  <td><strong>20.48 MB</strong></td>
+                  <td>26.00 MB</td>
+                  <td>79.99 MB</td>
+                  <td>249.78 MB</td>
+                </tr>
+                <tr>
+                  <td>Avg. Uncertainty</td>
+                  <td>5.66e+00</td>
+                  <td>8.10e+00</td>
+                  <td>2.65e+01</td>
+                  <td>8.40e+00</td>
+                </tr>
+                <tr>
+                  <td>DE MAE</td>
+                  <td>2.22e+00</td>
+                  <td><strong>1.56e+00</strong></td>
+                  <td>2.74e+01</td>
+                  <td>1.74e+01</td>
+                </tr>
+                <tr>
+                  <td>DE MRE</td>
+                  <td>1.59 %</td>
+                  <td><strong>0.56 %</strong></td>
+                  <td>3.36 %</td>
+                  <td>1.53 %</td>
+                </tr>
+                <tr>
+                  <td>UQ PCC</td>
+                  <td>0.8393</td>
+                  <td>0.9531</td>
+                  <td>0.8079</td>
+                  <td>0.7782</td>
+                </tr>
+                <tr>
+                  <td>UQ Confidence</td>
+                  <td>-4.83 %</td>
+                  <td><strong>1.53 %</strong></td>
+                  <td>-3.45 %</td>
+                  <td>7.36 %</td>
+                </tr>
+              </tbody>
+            </table>
 
-					<p>A pretty self-explanatory plot comparing the inference times of all models. 
-						The differences mainly arise from the difference in model size (trainable parameters) and, in the case of LatentNeuralODE from the computional cost of numerical integration.</p>
+              <details>
+              <summary>Comparative Plots</summary>
+              <div class="sub-section" id="simple_ode-comparative">
+              </div>
+              </details>
+              <details>
+              <summary>FullyConnected</summary>
+              <div class="sub-section" id="simple_ode-FullyConnected">
+              </div>
+              </details>
+              <details>
+              <summary>MultiONet</summary>
+              <div class="sub-section" id="simple_ode-MultiONet">
+              </div>
+              </details>
+              <details>
+              <summary>LatentNeuralODE</summary>
+              <div class="sub-section" id="simple_ode-LatentNeuralODE">
+              </div>
+              </details>
+              <details>
+              <summary>LatentPoly</summary>
+              <div class="sub-section" id="simple_ode-LatentPoly">
+              </div>
+              </details>
 
-					<img src="assets/images/comparative_plots/uncertainty_over_time.png" alt="Uncertainty Over Time"
-					style="width: 90%; max-width: 800px; margin: 0 auto; display: block;">
+          </div>
+          </details>
 
-					<p>The key plot regarding uncertainty quantification. It compares the mean absolute error across time with the 1&sigma; interval of the DeepEnsemble predictions.
-						This plot can give insights into the quality of the uncertainty estimates, showing over or underconfidence of the model. 
-						It should be noted that the 1&sigma; interval is a somewhat arbitrary choice and hence it could be argued that the predicted uncertainty could be arbitrarily rescaled.
-						To gain further insights into the quality of the uncertainty estimates, we can use the following plot as well as the Pearson correlation coefficient between uncertainty and error.
-					</p>
+          <!-- Dataset: simple_reaction -->
+          <details>
+          <summary>simple_reaction</summary>
+          <div class="sub-section">
 
-					<img src="assets/images/comparative_plots/uncertainty_error_corr_comparison.png" alt="Uncertainty Error Correlation Comparison"
-						style="width: 50%; max-width: 800px; margin: 0 auto; display: block;">
+            <table class="my-metrics-table">
+              <thead>
+                <tr>
+                  <th>Metric</th>
+                  <th>MultiONet</th>
+                  <th>FullyConnected</th>
+                  <th>LatentPoly</th>
+                  <th>LatentNeuralODE</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>MSE</td>
+                  <td>1.18e-03</td>
+                  <td><strong>5.27e-06</strong></td>
+                  <td>3.33e-03</td>
+                  <td>2.96e-01</td>
+                </tr>
+                <tr>
+                  <td>MAE</td>
+                  <td>1.73e-02</td>
+                  <td><strong>1.12e-03</strong></td>
+                  <td>2.81e-02</td>
+                  <td>2.61e-01</td>
+                </tr>
+                <tr>
+                  <td>MRE</td>
+                  <td>0.29 %</td>
+                  <td><strong>0.02 %</strong></td>
+                  <td>0.55 %</td>
+                  <td>5.23 %</td>
+                </tr>
+                <tr>
+                  <td>Epochs</td>
+                  <td>12000</td>
+                  <td>10000</td>
+                  <td>10000</td>
+                  <td>7000</td>
+                </tr>
+                <tr>
+                  <td>Train Time (hh:mm:ss)</td>
+                  <td>01:41:39</td>
+                  <td><strong>00:35:33</strong></td>
+                  <td>03:22:24</td>
+                  <td>05:53:19</td>
+                </tr>
+                <tr>
+                  <td>Inference Times</td>
+                  <td>3.09 ms ± 0.70 ms</td>
+                  <td>1.06 ms ± 0.07 ms</td>
+                  <td><strong>736.66 µs ± 21.15 µs</strong></td>
+                  <td>69.49 ms ± 0.90 ms</td>
+                </tr>
+                <tr>
+                  <td>Gradient PCC</td>
+                  <td>0.1708</td>
+                  <td>0.4613</td>
+                  <td>0.5081</td>
+                  <td>0.5332</td>
+                </tr>
+                <tr>
+                  <td># Trainable Params</td>
+                  <td>3109252</td>
+                  <td><strong>312821</strong></td>
+                  <td>517411</td>
+                  <td>1100426</td>
+                </tr>
+                <tr>
+                  <td>Model Memory (MB)</td>
+                  <td>11.87 MB</td>
+                  <td><strong>1.20 MB</strong></td>
+                  <td>4.02 MB</td>
+                  <td>9.25 MB</td>
+                </tr>
+                <tr>
+                  <td>Forward Pass Memory (MB)</td>
+                  <td>26.53 MB</td>
+                  <td><strong>13.25 MB</strong></td>
+                  <td>197.74 MB</td>
+                  <td>249.79 MB</td>
+                </tr>
+                <tr>
+                  <td>Avg. Uncertainty</td>
+                  <td>1.29e-02</td>
+                  <td>1.35e-03</td>
+                  <td>5.53e-02</td>
+                  <td>2.72e-01</td>
+                </tr>
+                <tr>
+                  <td>DE MAE</td>
+                  <td>8.56e-03</td>
+                  <td><strong>5.42e-04</strong></td>
+                  <td>1.95e-02</td>
+                  <td>2.15e-01</td>
+                </tr>
+                <tr>
+                  <td>DE MRE</td>
+                  <td>0.16 %</td>
+                  <td><strong>0.01 %</strong></td>
+                  <td>0.41 %</td>
+                  <td>3.86 %</td>
+                </tr>
+                <tr>
+                  <td>UQ PCC</td>
+                  <td>0.7300</td>
+                  <td>0.6513</td>
+                  <td>0.3883</td>
+                  <td>0.6622</td>
+                </tr>
+                <tr>
+                  <td>UQ Confidence</td>
+                  <td>-0.45 %</td>
+                  <td><strong>0.05 %</strong></td>
+                  <td>1.64 %</td>
+                  <td>-6.54 %</td>
+                </tr>
+              </tbody>
+            </table>
 
-					<p>
-						One of two heatmap plots to visualise the correlatory investigations of the benchmark.
-						This plot is related to uncertainty quantification, visualising the correlation between predicted uncertainty and actual prediction error at each point.
-						The white dashed line visualises an ideally calibrated model which would always accurately predict the magnitude of each error. 
-						One clearly visible effect is the overconfidence of FullyConnected, which is evidenced by its skewing above the diagonal. 
-						Note that the colormap is log scale, so much of the observed scattering is rather minor and a large fraction of all counts falls into the pixel in the lower left corner (very small error and uncertainty).
-					</p>
+              <details>
+              <summary>Comparative Plots</summary>
+              <div class="sub-section" id="simple_reaction-comparative">
+              </div>
+              </details>
+              <details>
+              <summary>FullyConnected</summary>
+              <div class="sub-section" id="simple_reaction-FullyConnected">
+              </div>
+              </details>
+              <details>
+              <summary>MultiONet</summary>
+              <div class="sub-section" id="simple_reaction-MultiONet">
+              </div>
+              </details>
+              <details>
+              <summary>LatentNeuralODE</summary>
+              <div class="sub-section" id="simple_reaction-LatentNeuralODE">
+              </div>
+              </details>
+              <details>
+              <summary>LatentPoly</summary>
+              <div class="sub-section" id="simple_reaction-LatentPoly">
+              </div>
+              </details>
 
-					<img src="assets/images/comparative_plots/gradients_error_corr_comparison.png" alt="Gradient Error Correlation Comparison"
-						style="width: 50%; max-width: 800px; margin: 0 auto; display: block;">
+          </div>
+          </details>
 
-					<p>
-						This second heatmap plot serves to visualise the correlation between the prediction errors and the gradient of the trajectry at this point.
-						This can show whether a given surrogate architecture struggles with dynamic regions of the data.
-						LatentNeuralODE and LatentPoly make a larger fraction of their errors at points with higher gradients compared to FullyConnected and MultiONet.
-						The colormap is again in logscale.
-					</p>
+      </section>
+      </div>
+    </section>
 
-					<h3 id="ind_plots">Individual Plots</h3>
+    <!-- Lightbox Overlay -->
+    <div id="lightbox-overlay">
+        <!-- A close button in the top-right corner -->
+        <button id="lightbox-close">&times;</button>
+        <!-- The enlarged plot image goes here -->
+        <img id="lightbox-img" alt="Enlarged Plot" />
+    </div>
 
-					<p>
-						Below is a selection of the plots that are created in the benchmark for every surrogate architecture that was trained.
-						They can be used to gain deeper insights into the behaviour of single models/architectures.
-					</p>
+    <!-- Footer -->
+    <footer id="footer" class="wrapper alt">
+        <div class="inner">
+            <ul class="menu">
+                <li>&copy; Untitled. All rights reserved.</li>
+                <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+            </ul>
+        </div>
+    </footer>
 
-					<img src="assets/images/individual_plots/accuracy_error_per_quantity.png" alt="Error per quanitity"
-						style="width: 60%; max-width: 800px; margin: 0 auto; display: block;">
-
-					<p>
-						This plot is similar to the smoothed-histogram plot comparing the relative errors of all benchmarked surrogates, but shows the relative errors for each quantity separately for a single surrogate model.
-						This helps identify quantities which the model struggles with or which the model is able to predict very well.
-					</p>
-
-					<img src="assets/images/individual_plots/accuracy_rel_errors_time.png" alt="Relative Errors Over Time"
-						style="width: 90%; max-width: 800px; margin: 0 auto; display: block;">
-
-					<p>
-						A detailed view into how the relative errors of the given architecture are distributed across time.
-						This plot displays both mean and median error for the given surrogate architecture as well as the range of different percentiles.
-					</p>
-
-					<img src="assets/images/individual_plots/interpolation_errors_over_time.png" alt="Interpolation Errors Over Time"
-						style="width: 90%; max-width: 800px; margin: 0 auto; display: block;">
-
-					<p>
-						This and the two subsequent plots show how the mean absolute error (MAE) develops across time for different modalities of the benchmark (here: Interpolation).
-						As expected, the errors increase for higher intervals, as there are fewer datapoints to train on and the remaining points may inaccurately represent the trajectories.
-					</p>
-
-					<img src="assets/images/individual_plots/extrapolation_errors_over_time.png" alt="Extrapolation Errors Over Time"
-						style="width: 90%; max-width: 800px; margin: 0 auto; display: block;">
-
-					<p>
-						Development of the MAE across time for the extrapolation modality. 
-						This plot in particular serves as a good sanity check for whether the models behave as expected, it clearly shows the error increasing rapidly behind the data cutoff.
-					</p>
-
-					<img src="assets/images/individual_plots/sparse_errors_over_time.png" alt="Sparse Errors Over Time"
-						style="width: 90%; max-width: 800px; margin: 0 auto; display: block;">
-
-					<p>
-						Development of the MAE across time for the sparse modality. As expected, overall errors increase rather uniformly with increasing sparsity.
-						However, the overall rate of this increase may vary between surrogate architectures as shown in the comparative plot for the different modalities. 
-					</p>
-
-					<img src="assets/images/individual_plots/losses_sparse.png" alt="Sparse Losses"
-						style="width: 90%; max-width: 800px; margin: 0 auto; display: block;">
-
-					<p>
-						There are a range of loss plots for the different models that are trained for the different modalities for each surrogate.
-						This plot is one example of these loss plots for the sparse modality, showing the loss trajectory for each trained FullyConnected model in this modality.
-					</p>
-
-					<img src="assets/images/individual_plots/uncertainty_deepensemble_preds.png" alt="Uncertainty DeepEnsemble Predictions"
-						style="width: 60%; max-width: 800px; margin: 0 auto; display: block;">
-
-					<p>
-						To get a feeling for the character of the uncertainty estimates, this plot shows the spread of the DeepEnsemble predictions on one sample in the dataset (i.e., one full set of trajectories).
-						The predictions of all models in the ensemble (here 5) are averaged and the resulting 1&sigma;, 2&sigma; and 3&sigma; intervals are plotted.
-						The spread is is slightly difficult to see as it is rather small, but it is recognisable e.g. for CH2+ or O2+.
-					</p>
-
-					<h3 id="comp_metrics">Comparative Metrics</h3>
-
-					<h3 id="ind_metrics">Individual Metrics</h3>
-
-					<p>The <code>surrogatename_metrics.yaml</code> is the most detailed result file, as it contains
-						every metric that was calculated during the benchmark of the corresponding surrogate. Which
-						metrics are calculated depends on the modalities that are activated in the config. </p>
-
-
-				</section>
-
-
-		</section>
-
-	</div>
-
-	<!-- Footer -->
-	<footer id="footer" class="wrapper alt">
-		<div class="inner">
-			<ul class="menu">
-				<li>&copy; Untitled. All rights reserved.</li>
-				<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-			</ul>
-		</div>
-	</footer>
-
-	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery.scrollex.min.js"></script>
-	<script src="assets/js/jquery.scrolly.min.js"></script>
-	<script src="assets/js/browser.min.js"></script>
-	<script src="assets/js/breakpoints.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
-	<script src="assets/js/menu-toggle.js"></script>
-
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/menu-toggle.js"></script>
+    <script src="assets/js/load-plots.js"></script>
+    <script src="assets/js/lightbox.js"></script>
 
 </body>
 
-</html>accuracy_error_distributions
+</html>
